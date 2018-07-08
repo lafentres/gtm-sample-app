@@ -1,0 +1,11 @@
+<% provide(:title, @post.title) %>
+
+<% content_for :meta_tags do %>
+  <%= render partial: 'posts/meta_tags', locals: {post: @post} %>
+<% end %>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <%= render "posts/post", post: @post %>
+  </div>
+</div>

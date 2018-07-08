@@ -1,0 +1,14 @@
+<!--- MOBILE SCALE -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, minimum-scale=1, user-scalable=yes"/>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<meta name='HandheldFriendly' content='True' />
+<meta name='MobileOptimized' content='320' />
+
+<%= csrf_meta_tags %>
+
+<% if content_for :meta_tags %>
+  <%= yield :meta_tags %>
+<% else %>
+  <meta name="keywords" content="cats" />
+  <meta name="description" content="A sample app demo of basic GTM setup...and pictures of my cat">
+<% end %>

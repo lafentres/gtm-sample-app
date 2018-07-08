@@ -1,0 +1,49 @@
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'event': 'dataLayer-loaded',
+        'userType': '<%= current_user ? 'registered' : 'unregistered' %>',
+
+        <% if @post&.created_at %>
+        'postTitle': '<%= @post.title&.downcase %>',
+        'postAuthor': '<%= @post.author&.downcase %>',
+        'postCategory': '<%= @post.category&.downcase %>',
+        'postPublishDate': '<%= @post.created_at&.to_date %>',
+        'postId': '<%= @post.id %>'
+        <% end %>
+    });
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KR4ZLJX');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KR4ZLJX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<% registration_event = get_ga_event(:registration_event) %>
+<% if registration_event %>
+  <div id="registration-event" class="js-event-registration"
+       data-event-registration-status="<%= registration_event['status'] %>"
+       data-event-registration-user-type="<%= registration_event['user_type'] %>"
+       data-event-registration-user-id="<%= registration_event['user_id'] ? registration_event['user_id'] : 'n/a' %>"
+       data-event-registration-method="<%= registration_event['method'] %>"
+       data-event-registration-error="<%= registration_event['error'] ? registration_event['error'] : 'n/a' %>" >
+  </div>
+  <% clear_ga_event(:registration_event) %>
+<% end %>
+
+
+<% login_event = get_ga_event(:login_event) %>
+<% if login_event %>
+  <div id="login-event" class="js-event-login"
+       data-event-login-status="<%= login_event['status'] %>"
+       data-event-login-user-type="<%= login_event['user_type'] %>"
+       data-event-login-user-id="<%= login_event['user_id'] ? login_event['user_id'] : 'n/a' %>"
+       data-event-login-method="<%= login_event['method'] %>"
+       data-event-login-error="<%= login_event['error'] ? login_event['error'] : 'n/a' %>" >
+  </div>
+  <% clear_ga_event(:login_event) %>
+<% end %>
+

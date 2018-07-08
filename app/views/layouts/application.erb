@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+
+  <%= render 'layouts/meta_tags' %>
+
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+
+  <%= render "layouts/gtm" %>
+</head>
+
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <%= link_to "Look At My Cat", root_path, class: "navbar-brand", data: {link_type: 'header-nav-tier-1'} %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto justify-content-end">
+        <li class="nav-item active">
+          <%= link_to "Home", root_path, class: "nav-link", data: {link_type: 'header-nav-tier-1'} %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Users", users_path, class: "nav-link", data: {link_type: 'header-nav-tier-1'} %>
+        </li>
+        <% if logged_in? %>
+          <% if current_user.admin? %>
+            <%= link_to "Create post", new_post_path, class: "nav-link", data: {link_type: 'header-nav-tier-1'} %>
+          <% end %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Profile", user_path(current_user), class: "dropdown-item", data: {link_type: 'header-nav-tier-2'} %>
+              <%= link_to "Settings", edit_user_path(current_user), class: "dropdown-item", data: {link_type: 'header-nav-tier-2'} %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Log out", logout_path, method: :delete, class: "dropdown-item", data: {link_type: 'header-nav-tier-2'} %>
+            </div>
+          </li>
+        <% else %>
+          <%= link_to "Sign up", signup_path, class: "nav-link", data: {link_type: 'header-nav-tier-1'} %>
+          <%= link_to "Log in", login_path, class: "nav-link", data: {link_type: 'header-nav-tier-1'} %>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-10">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'application' %>
+
+</body>
+</html>

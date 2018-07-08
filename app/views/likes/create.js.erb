@@ -1,0 +1,13 @@
+$('.js-like-<%= @post.id %>').replaceWith("<%= escape_javascript(render(partial: 'likes/like_button', locals: {post: @post})) %>");
+
+var eventLabel = '<%= @post.title %>';
+var eventUrl = '<%= post_url(@post) %>';
+var likeDetails = {
+    'postTitle': '<%= @post.title&.downcase %>',
+    'postAuthor': '<%= @post.author&.downcase %>',
+    'postCategory': '<%= @post.category&.downcase %>',
+    'postPublishDate': '<%= @post.created_at.to_date %>',
+    'postId': '<%= @post.id %>'
+};
+
+GA_trackLike(eventLabel, eventUrl, likeDetails);

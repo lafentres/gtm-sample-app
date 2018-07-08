@@ -1,0 +1,31 @@
+// Remove infinite scroll button
+$('.js-infinite-scroll').remove();
+
+// Insert new infinite scroll content block
+$('#js-index-content-container').append("<%= escape_javascript(render(partial: 'home/index_content_block')) %>");
+
+// Update URL with pushState
+var newPath = "<%= root_path(page: @page) %>";
+var newTitle = "<%= full_title("Home - Page #{@page}").html_safe %>"
+var newId = "index-content-block-<%= @page %>";
+updateUrl(newPath, newTitle, newId);
+
+// Initialize event listeners to update urls and titles on scroll
+updateUrlInit();
+
+// Share event listener
+$('.js-share-button').on("click", shareInit);
+
+// Load more button event listener
+if ($(".js-infinite-scroll-link").length > 0) {
+    var buttons = $(".js-infinite-scroll-link");
+
+    var curButton;
+    for (var i = 0; i < buttons.length; i++) {
+        curButton = buttons[i];
+        inView('#' + curButton.id).on('enter', function (e) {
+            $(e)[0].click();
+        });
+    }
+    buttons.removeClass("js-infinite-scroll-link");
+}

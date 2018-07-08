@@ -1,0 +1,28 @@
+<% provide(:title, @user.username) %>
+
+<div class="row justify-content-center">
+  <aside class="col-md-8">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.username %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <%= paginate @likes %>
+
+    <ul class="list-unstyled">
+      <% @likes.each do |like| %>
+        <li class="post-item">
+          <%= render "posts/post", post: like.post %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= paginate @likes %>
+  </div>
+</div>

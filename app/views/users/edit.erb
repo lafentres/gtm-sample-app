@@ -1,0 +1,42 @@
+<% provide(:title, "Edit user") %>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="text-center">Update your profile</h3>
+      </div>
+      <div class="card-body">
+        <%= form_for(@user, url: update_user_path) do |f| %>
+          <%= render 'shared/error_messages', obj: @user %>
+          <div class="form-group">
+            <%= gravatar_for @user %>
+            <a href="http://gravatar.com/emails" target="_blank">change</a>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :username %>
+            <%= f.text_field :username, class: 'form-control js-event-form-field', data: {event_form_field_value: 'edit - username'} %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control js-event-form-field', data: {event_form_field_value: 'edit - email'} %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control js-event-form-field', data: {event_form_field_value: 'edit - password'} %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: 'form-control js-event-form-field', data: {event_form_field_value: 'edit - password confirmation'} %>
+          </div>
+          <%= f.submit "Save changes", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

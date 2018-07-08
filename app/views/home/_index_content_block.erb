@@ -1,0 +1,25 @@
+<% url = @page == 1 ? root_path : root_path(page: @page) %>
+
+<% title = @page == 1 ? full_title("Home").html_safe : full_title("Home - Page #{@page}").html_safe %>
+
+<div id="content-block-<%= @page %>"
+     class="js-url-update"
+     data-url="<%= url %>"
+     data-title="<%= title %>">
+
+  <ul class="list-unstyled">
+    <% @posts.each do |post| %>
+      <li class="post-item">
+        <%= render "posts/post", post: post %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% unless @last_page %>
+    <%= content_tag(:div, class: 'text-center btn-container js-infinite-scroll') do %>
+      <%= link_to(root_path(page: @page + 1), id: "btn-#{@page + 1}", class: 'btn js-infinite-scroll-link', remote: true) do %>
+        Load More
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

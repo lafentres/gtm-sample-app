@@ -1,0 +1,66 @@
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
+/* elements */
+body {
+  background-color:#FFF4FB;
+}
+
+header {
+  padding-bottom: 20px;
+}
+
+/* bootstrap overrides */
+.navbar {
+  background-color:#572971;
+}
+
+.btn {
+  background-color:#572971;
+}
+
+/* icons */
+.icon-selected {
+  color: #661041;
+}
+
+.icon-unselected {
+  color: #CB86AD;
+}
+
+
+/* links */
+a:link {
+  color: #75498D;
+}
+
+a:visited {
+  color: #A95384;
+}
+
+a:focus {
+  color: #3D1155;
+}
+
+a:hover {
+  color: #3D1155;
+}
+
+a:active {
+  color: #A95384;
+}
+
+/* posts */
+.post-item {
+  padding-bottom: 50px;
+}
+
+.card-body-interactions {
+  border-bottom: 1px solid lightgray;
+}
+
+.btn-container {
+  padding-bottom: 50px;
+}
