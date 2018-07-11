@@ -60,9 +60,8 @@ $(document).ready(function () {
     }
 
 
-// Login
+    // Login
     if($('.js-event-login').length > 0) {
-        console.log("beep");
         var loginEvent = $('.js-event-login');
         window.dataLayer.push({
             'event': 'login',
@@ -77,7 +76,7 @@ $(document).ready(function () {
     }
 
 
-// Form field change
+    // Form field change
     if($('.js-event-form-field').length > 0){
         $('.js-event-form-field').on('change', function(e){
             window.dataLayer.push({

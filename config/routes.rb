@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  get '/user_activation/:token/edit', to: 'user_activations#edit', as: :edit_user_activation
-
   get '/password_resets/new', to: 'password_resets#new', as: :new_password_reset
   post '/password_resets', to: 'password_resets#create', as: :password_resets
   get '/password_resets/:token/edit', to: 'password_resets#edit', as: :edit_password_reset

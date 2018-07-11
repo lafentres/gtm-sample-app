@@ -48,7 +48,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def valid_user
-    unless @user && @user.activated? && @user.authenticated?(:reset, params[:token])
+    unless @user && @user.authenticated?(:reset, params[:token])
       redirect_to root_url
     end
   end

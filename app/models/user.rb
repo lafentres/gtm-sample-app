@@ -1,7 +1,6 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :reset_token
   before_save :downcase_email
-  before_create :create_activation_digest
 
   validates :username,
             presence: true,
@@ -22,8 +21,6 @@ class User < ApplicationRecord
             allow_nil: true
 
   has_many :likes, dependent: :destroy
-
-  scope :activated, -> { where(activated: true) }
 
 
 
@@ -54,14 +51,6 @@ class User < ApplicationRecord
     end
   end
 
-  def activate
-    update_columns(activated: true, activated_at: Time.zone.now)
-  end
-
-  def send_activation_email
-    UserMailer.user_activation(self).deliver_now
-  end
-
   def create_reset_digest
     self.reset_token = User.new_token
     update_columns(reset_digest:  User.digest(reset_token), reset_sent_at: Time.zone.now)
@@ -79,10 +68,5 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
-  end
-
-  def create_activation_digest
-    self.activation_token  = User.new_token
-    self.activation_digest = User.digest(activation_token)
   end
 end

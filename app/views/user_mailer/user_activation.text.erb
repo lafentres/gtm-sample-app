@@ -1,7 +1,0 @@
-Account Activation | Look At My Cat
-
-Hello <%= @user.username %>,
-
-Welcome to Look At My Cat! Click on the link below to activate your account:
-
-<%= edit_user_activation_url(token: @user.activation_token, email: @user.email) %>

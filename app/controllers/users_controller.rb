@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :is_admin, only: [:destroy]
 
   def index
-    @users = User.activated.page(params[:page]).per(10)
+    @users = User.page(params[:page]).per(10)
   end
 
   def destroy
@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    redirect_to root_url and return unless @user.activated
     @likes = @user.likes.page(params[:page]).per(5)
   end
 
@@ -26,8 +25,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      log_in(@user)
       session[:registration_event] = {status: 'success', user_type: 'registered', user_id: @user.id, method: 'on-site'}
       redirect_to root_url
     else
