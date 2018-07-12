@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706140733) do
+ActiveRecord::Schema.define(version: 20180711214657) do
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "post_id", null: false
@@ -29,16 +29,6 @@ ActiveRecord::Schema.define(version: 20180706140733) do
     t.string "image", null: false
     t.integer "image_width", null: false
     t.integer "image_height", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "posts_old", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "title", null: false
-    t.string "description", null: false
-    t.string "category", limit: 6, default: "others", null: false
-    t.string "author", null: false
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
