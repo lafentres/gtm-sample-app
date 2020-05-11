@@ -1,5 +1,6 @@
 # README
 
+
 ## GTM Sample App
 
 Rails version: 5.1.6
